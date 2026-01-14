@@ -8,21 +8,13 @@ interface NavbarProps {
 }
 
 const Logo = () => (
-  <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100" height="100" rx="24" fill="#0A1122" />
-    <circle cx="50" cy="50" r="38" stroke="#3B82F6" strokeWidth="1" strokeOpacity="0.2" />
-    <path d="M35 30L50 50L65 30V70L50 50L35 70V30Z" fill="url(#paint0_linear)" />
-    <path d="M22 40C20 45 20 55 22 60" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" />
-    <path d="M16 35C13 42 13 58 16 65" stroke="#2563EB" strokeWidth="3" strokeLinecap="round" />
-    <path d="M78 40C80 45 80 55 78 60" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" />
-    <path d="M84 35C87 42 87 58 84 65" stroke="#2563EB" strokeWidth="3" strokeLinecap="round" />
-    <defs>
-      <linearGradient id="paint0_linear" x1="50" y1="30" x2="50" y2="70" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#93C5FD" />
-        <stop offset="1" stopColor="#2563EB" />
-      </linearGradient>
-    </defs>
-  </svg>
+  <div className="w-10 h-10 relative flex items-center justify-center">
+    <img 
+      src="logo.png" 
+      alt="Orion Logo" 
+      className="w-full h-full object-contain"
+    />
+  </div>
 );
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
