@@ -1,7 +1,8 @@
+
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : '';
-const ai = new GoogleGenAI({ apiKey: apiKey || '' });
+// Always use const ai = new GoogleGenAI({apiKey: process.env.API_KEY});
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateThreatReport = async (target: string, type: 'website' | 'ioc'): Promise<string> => {
   try {
@@ -15,8 +16,9 @@ export const generateThreatReport = async (target: string, type: 'website' | 'io
     - Known Entities/Associations
     - Investigative Risk Level (CRITICAL, HIGH, MODERATE, LOW, NEUTRAL)`;
 
+    // Use gemini-3-pro-preview for complex technical analysis and reasoning in OSINT tasks.
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-3-pro-preview',
       contents: prompt,
       config: {
         temperature: 0.3, 
@@ -25,6 +27,7 @@ export const generateThreatReport = async (target: string, type: 'website' | 'io
       }
     });
 
+    // Access the .text property directly, it is not a method.
     return response.text || "No intelligence data recovered from remote probe.";
   } catch (error) {
     console.error("Orion Probe Error:", error);
@@ -35,6 +38,7 @@ export const generateThreatReport = async (target: string, type: 'website' | 'io
 export const getBriefIntelligenceSummary = async (): Promise<string> => {
   try {
     const prompt = `Provide a concise 3-sentence technical situational report of global cyber activity. Focus on infrastructure-level events, protocol vulnerabilities, or documented threat actor movements. Do not use buzzwords.`;
+    // Use gemini-3-flash-preview for basic technical summarization tasks.
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: prompt,
@@ -42,6 +46,7 @@ export const getBriefIntelligenceSummary = async (): Promise<string> => {
         maxOutputTokens: 150,
       }
     });
+    // Access the .text property directly.
     return response.text || "Intelligence stream synchronization failed.";
   } catch (error) {
     return "Intelligence stream synchronization failed.";

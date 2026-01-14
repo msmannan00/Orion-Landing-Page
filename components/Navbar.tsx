@@ -1,21 +1,29 @@
-
-import React from 'react';
-import { Command, Ghost, Lock, Code2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Command, Ghost, Lock, Code2, ListTree } from 'lucide-react';
 
 interface NavbarProps {
-  onNavigate: (view: 'home' | 'adversaries' | 'api-docs') => void;
-  currentView: 'home' | 'adversaries' | 'api-docs';
+  onNavigate: (view: 'home' | 'adversaries' | 'api-docs' | 'sources') => void;
+  currentView: 'home' | 'adversaries' | 'api-docs' | 'sources';
 }
 
-const Logo = () => (
-  <div className="w-10 h-10 relative flex items-center justify-center">
-    <img 
-      src="logo.png" 
-      alt="Orion Logo" 
-      className="w-full h-full object-contain"
-    />
-  </div>
-);
+const Logo = () => {
+  const [error, setError] = useState(false);
+
+  return (
+    <div className="w-10 h-10 relative flex items-center justify-center rounded-xl overflow-hidden shadow-[0_0_20px_rgba(59,130,246,0.3)] border border-white/10 bg-[#0a0a0a]">
+      {!error ? (
+        <img 
+          src="/logo.png" 
+          alt="Orion Logo" 
+          className="w-full h-full object-cover scale-105"
+          onError={() => setError(true)}
+        />
+      ) : (
+        <div className="text-blue-500 font-black text-xl tracking-tighter">O</div>
+      )}
+    </div>
+  );
+};
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
   return (
@@ -51,6 +59,13 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
             >
               <Ghost className="w-3 h-3" />
               Adversaries
+            </button>
+            <button 
+              onClick={() => onNavigate('sources')} 
+              className={`${currentView === 'sources' ? 'text-blue-400' : 'text-white/40'} hover:text-white transition-all text-[10px] font-bold uppercase tracking-widest flex items-center gap-2`}
+            >
+              <ListTree className="w-3 h-3" />
+              Sources
             </button>
             <button 
               onClick={() => onNavigate('api-docs')} 
