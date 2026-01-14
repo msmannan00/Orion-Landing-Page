@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ArrowRight, 
   Database, 
@@ -32,10 +32,17 @@ import {
   Maximize2,
   Crosshair,
   ShieldQuestion,
-  Layers
+  Layers,
+  Facebook,
+  Twitter,
+  Youtube,
+  Instagram,
+  Linkedin,
+  Rss
 } from 'lucide-react';
 import Navbar from './components/Navbar';
 import IntelligenceProbe from './components/IntelligenceProbe';
+import IntelligenceFeed from './components/IntelligenceFeed';
 import LegalModals from './components/LegalModals';
 import ThreatActors from './components/ThreatActors';
 import ApiDocumentation from './components/ApiDocumentation';
@@ -46,6 +53,18 @@ const App: React.FC = () => {
   const [view, setView] = useState<'home' | 'adversaries' | 'api-docs' | 'sources'>('home');
   const [footerLogoError, setFooterLogoError] = useState(false);
   const CALENDLY_URL = "https://calendly.com/msmannan/30min";
+
+  // Force Tab Title to Orion Intelligence
+  useEffect(() => {
+    document.title = "Orion Intelligence";
+    // Check periodically if the title was changed by external environment
+    const interval = setInterval(() => {
+      if (document.title !== "Orion Intelligence") {
+        document.title = "Orion Intelligence";
+      }
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="min-h-screen mesh-gradient selection:bg-blue-500/30">
@@ -73,7 +92,7 @@ const App: React.FC = () => {
           </div>
         ) : (
           <>
-            {/* Hero Section - Full Height with Stats Integrated */}
+            {/* Hero Section */}
             <section className="relative min-h-screen flex flex-col px-6 lg:px-12 overflow-hidden border-b border-white/5">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[2000px] h-full bg-blue-500/[0.04] blur-[150px] rounded-full pointer-events-none"></div>
               
@@ -83,9 +102,8 @@ const App: React.FC = () => {
                   GOVERNANCE STANDARD V4.2.0
                 </div>
                 
-                <h1 className="hero-heading text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold text-white mb-10 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-100 max-w-6xl text-balance">
-                  Unified Investigative <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40">Intelligence OS.</span>
+                <h1 className="hero-heading text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-10 pb-4 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-100 max-w-7xl whitespace-nowrap overflow-hidden text-ellipsis">
+                  Unified Investigative Intelligence
                 </h1>
                 
                 <p className="text-lg md:text-xl text-white/50 leading-relaxed font-medium mb-12 max-w-4xl animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
@@ -107,7 +125,7 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* Integrated Stats Row at bottom of Hero */}
+              {/* Stats Row */}
               <div className="max-w-[1400px] mx-auto w-full pb-12 flex flex-wrap items-center justify-between gap-8 font-mono border-t border-white/5 pt-10 animate-in fade-in duration-1000 delay-500">
                 {[
                   { label: 'Ingested Records', val: '14.2B+', color: 'text-blue-500' },
@@ -123,16 +141,16 @@ const App: React.FC = () => {
               </div>
             </section>
 
-            {/* Strategic Modular Core Section - Slightly lighter background to break monotony */}
+            {/* Strategic Modular Core Section */}
             <section id="core" className="px-6 lg:px-12 py-32 bg-[#080808] relative">
               <div className="max-w-[1400px] mx-auto">
                 <div className="flex flex-col lg:flex-row justify-between items-end gap-16 mb-24">
-                  <div className="max-w-2xl space-y-8">
+                  <div className="max-w-4xl space-y-8">
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-blue-500"></div>
                       <h2 className="text-[12px] font-bold text-white/40 uppercase tracking-[0.4em]">Strategic Modular Core</h2>
                     </div>
-                    <h3 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">Enterprise <br />Investigative Chassis.</h3>
+                    <h3 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-none whitespace-nowrap overflow-hidden text-ellipsis pb-2">Unified Defense Platform.</h3>
                   </div>
                   <div className="max-w-md space-y-6 border-l border-white/5 pl-10">
                     <p className="text-lg text-white/40 leading-relaxed font-medium">High-fidelity infrastructure for sovereign intelligence operations and organizational threat discovery.</p>
@@ -174,7 +192,7 @@ const App: React.FC = () => {
               </div>
             </section>
 
-            {/* Whistleblowing Section - Updated with bluish background */}
+            {/* Whistleblowing Section */}
             <section className="px-6 lg:px-12 py-32 discovery-gradient relative overflow-hidden border-y border-white/5">
                <div className="max-w-[1400px] mx-auto">
                  <div className="glass-card rounded-[3rem] p-12 lg:p-24 border border-white/5 relative overflow-hidden">
@@ -187,21 +205,17 @@ const App: React.FC = () => {
                           <Lock className="w-4 h-4" />
                           TLP:RED SECURE CHANNEL
                         </div>
-                        <h2 className="text-5xl font-extrabold text-white tracking-tight leading-[1.1]">
-                          Clinical Intake for <br />
-                          <span className="text-white/40">High-Stakes Reports.</span>
-                        </h2>
+                        <h2 className="text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-none whitespace-nowrap overflow-hidden text-ellipsis pb-2">Secure Reporting System.</h2>
                         <p className="text-lg text-white/40 leading-relaxed max-w-xl text-balance">
                           Orion includes a fully integrated secure whistleblowing module designed to safely collect sensitive disclosures while protecting the identity of the submitter. 
-                          Organizations receive internal or external reports through an encrypted submission channel built on a hardened <strong>GlobaLeaks</strong> core for maximum anonymity.
                         </p>
                         
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                            {[
-                             { icon: Fingerprint, title: 'Identity Shielding', desc: 'Hardware-level scrubbing of IP, browser fingerprint, and metadata.' },
-                             { icon: Key, title: 'PGP Orchestration', desc: 'End-to-end clinical encryption for all submitted attachments.' },
-                             { icon: Anchor, title: 'Role Isolation', desc: 'Reports are routed only to verified organizational auditors.' },
-                             { icon: Radio, title: 'Tor-Native Intake', desc: 'Seamless GlobaLeaks integration via authenticated onion nodes.' }
+                             { icon: Fingerprint, title: 'Identity Shielding', desc: 'Metadata scrubbing.' },
+                             { icon: Key, title: 'PGP Orchestration', desc: 'E2EE Encryption.' },
+                             { icon: Anchor, title: 'Role Isolation', desc: 'Verified auditors only.' },
+                             { icon: Radio, title: 'Onion Intake', desc: 'GlobaLeaks native.' }
                            ].map((feat, i) => (
                              <div key={i} className="space-y-3">
                                <div className="flex items-center gap-3">
@@ -222,9 +236,9 @@ const App: React.FC = () => {
                                 <Lock className="w-8 h-8 text-white" />
                               </div>
                               <h4 className="text-xl font-bold text-white mb-4 uppercase tracking-widest">Initialize Drop</h4>
-                              <p className="text-[10px] text-white/30 font-mono mb-8 uppercase tracking-widest">INTEGRATED_GLOBALEAKS_V1.4</p>
+                              <p className="text-[10px] text-white/30 font-mono mb-8 uppercase tracking-widest">ORION_SECURE_INTAKE_V1.4</p>
                               <a href="https://orionleaks.com/" target="_blank" rel="noopener noreferrer" className="px-8 py-3 bg-white text-black font-black text-[10px] uppercase tracking-[0.2em] rounded-xl hover:bg-blue-50 transition-all active:scale-95 block">
-                                Enter Intake Environment
+                                Enter Portal
                               </a>
                            </div>
                         </div>
@@ -234,29 +248,38 @@ const App: React.FC = () => {
                </div>
             </section>
 
-            {/* Probe Section - Dark slate bg */}
+            {/* Probe & Feed Section */}
             <section id="probe" className="px-6 lg:px-12 py-32 overflow-hidden relative bg-[#050505] border-y border-white/5">
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-500/[0.02] blur-[150px] pointer-events-none rounded-full"></div>
               <div className="max-w-[1400px] mx-auto relative z-10">
-                <div className="text-center mb-20 max-w-4xl mx-auto space-y-6">
+                <div className="text-center mb-20 space-y-6">
                    <div className="inline-flex items-center gap-4 text-blue-500 font-bold text-[10px] uppercase tracking-[0.5em]">
                      <Terminal className="w-4 h-4" />
                      Investigation Console
                    </div>
-                   <h3 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight">Interrogate the Spectrum.</h3>
+                   <h3 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-none whitespace-nowrap overflow-hidden text-ellipsis pb-2">Intelligence Search.</h3>
                    <p className="text-lg text-white/20 max-w-3xl mx-auto leading-relaxed">
                      Enter a domain, hash, or persona identifier to initiate a clinical probe across monitored leak repositories and infrastructure logs.
                    </p>
                 </div>
-                <IntelligenceProbe />
+                
+                {/* Responsive grid for Console and Feed */}
+                <div className="grid lg:grid-cols-12 gap-10 items-stretch">
+                  <div className="lg:col-span-8 flex flex-col">
+                    <IntelligenceProbe />
+                  </div>
+                  <div className="lg:col-span-4 flex flex-col">
+                    <IntelligenceFeed />
+                  </div>
+                </div>
               </div>
             </section>
 
-            {/* Zero-Trust Administrative Controls Section - Slightly offset gray */}
+            {/* Zero-Trust Administrative Controls Section */}
             <section className="px-6 lg:px-12 py-32 bg-[#0a0a0a]">
               <div className="max-w-[1400px] mx-auto">
                 <div className="flex flex-col lg:flex-row justify-between items-end gap-16 mb-24">
-                  <div className="max-w-2xl space-y-8">
+                  <div className="max-w-4xl space-y-8">
                     <div className="flex items-center gap-4">
                       <div className="px-3 py-1 rounded-lg bg-green-500/10 border border-green-500/20 text-green-500 text-[10px] font-black uppercase tracking-[0.3em] flex items-center gap-2">
                         <CircleCheck className="w-3 h-3" />
@@ -264,7 +287,7 @@ const App: React.FC = () => {
                       </div>
                       <h2 className="text-[12px] font-bold text-white/40 uppercase tracking-[0.4em]">Administrative Governance</h2>
                     </div>
-                    <h3 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">Zero-Trust <br />Control Plane.</h3>
+                    <h3 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-none whitespace-nowrap overflow-hidden text-ellipsis pb-2">Central Control Plane.</h3>
                   </div>
                   <div className="max-w-md space-y-6 border-l border-white/5 pl-10">
                     <p className="text-lg text-white/40 leading-relaxed font-medium text-balance">
@@ -275,9 +298,9 @@ const App: React.FC = () => {
 
                 <div className="grid md:grid-cols-3 gap-8">
                    {[
-                     { icon: Fingerprint, title: 'FIDO2/U2F Support', desc: 'Hardware-backed identity verification for all investigative accounts.' },
-                     { icon: FileSearch, title: 'Audit Readiness', desc: 'Complete audit logging for enterprise-wide compliance and clinical reporting.' },
-                     { icon: Server, title: 'Multi-tenant isolation', desc: 'Hardware-level virtualization ensuring strict separation of discovery streams.' }
+                     { icon: Fingerprint, title: 'FIDO2 Support', desc: 'Hardware-backed verification.' },
+                     { icon: FileSearch, title: 'Audit Ready', desc: 'Full compliance logging.' },
+                     { icon: Server, title: 'Isolation', desc: 'Hardware-level virtualization.' }
                    ].map((item, i) => (
                      <div key={i} className="glass-card p-10 rounded-3xl border border-white/5 group hover:border-blue-500/20 transition-all">
                         <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center mb-8 border border-blue-500/20 group-hover:scale-110 transition-transform">
@@ -294,17 +317,17 @@ const App: React.FC = () => {
             {/* Final Section: Operational Liaison */}
             <section className="px-6 lg:px-12 py-40 discovery-gradient group overflow-hidden relative border-t border-white/10">
               <div className="max-w-[1400px] mx-auto flex flex-col items-center text-center relative z-10">
-                 <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-[10px] font-bold uppercase tracking-[0.25em] mb-12">
+                 <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-12">
                    <Zap className="w-4 h-4 fill-blue-500" />
                    ORION_GRID: NOMINAL
                  </div>
                  
                  <div className="space-y-6 mb-20">
-                    <h2 className="text-5xl md:text-7xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight">
+                    <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight whitespace-nowrap overflow-hidden text-ellipsis pb-2">
                       <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 whitespace-nowrap">Operational Liaison.</span>
                     </h2>
                     <p className="text-xl text-white/40 leading-relaxed font-medium max-w-3xl mx-auto text-balance">
-                      Discover how Orion Intelligence can strengthen your security posture and protect your organization from evolving threats. Get in touch today to start your journey toward smarter defense.
+                      Discover how Orion Intelligence can strengthen your security posture and protect your organization from evolving threats.
                     </p>
                  </div>
 
@@ -362,13 +385,13 @@ const App: React.FC = () => {
 
       <footer className="px-6 lg:px-12 py-20 bg-[#010101] border-t border-white/10 relative z-10">
         <div className="max-w-[1400px] mx-auto">
-          <div className="grid md:grid-cols-6 gap-16 mb-20">
-            <div className="col-span-1 md:col-span-3 space-y-8">
+          <div className="grid md:grid-cols-12 gap-16 mb-20">
+            <div className="col-span-12 md:col-span-4 space-y-8">
               <div className="flex items-center gap-4 cursor-pointer" onClick={() => setView('home')}>
                 <div className="w-12 h-12 relative flex items-center justify-center rounded-xl overflow-hidden border border-white/10 shadow-lg bg-black">
                   {!footerLogoError ? (
                     <img 
-                      src="public_html/logo.png" 
+                      src="https://try.orionintelligence.org/api/s/static/system/logo_url_default.png" 
                       alt="Orion" 
                       className="w-full h-full object-cover scale-110" 
                       onError={() => setFooterLogoError(true)}
@@ -384,7 +407,7 @@ const App: React.FC = () => {
               </p>
             </div>
             
-            <div className="space-y-8">
+            <div className="col-span-6 md:col-span-2 space-y-8">
               <h5 className="text-[12px] font-bold text-white uppercase tracking-[0.3em] opacity-90">Platform</h5>
               <ul className="space-y-4 text-[12px] text-white/60 uppercase tracking-[0.1em] font-bold">
                 <li><a href="https://try.orionintelligence.org/" className="hover:text-blue-500 transition-colors flex items-center gap-2">Live Portal <ExternalLink className="w-3 h-3" /></a></li>
@@ -392,7 +415,7 @@ const App: React.FC = () => {
               </ul>
             </div>
 
-            <div className="space-y-8">
+            <div className="col-span-6 md:col-span-2 space-y-8">
               <h5 className="text-[12px] font-bold text-white uppercase tracking-[0.3em] opacity-90">Intelligence</h5>
               <ul className="space-y-4 text-[12px] text-white/60 uppercase tracking-[0.1em] font-bold">
                 <li><button onClick={() => setView('adversaries')} className="hover:text-blue-500 transition-all flex items-center gap-2">Threat Grid <Ghost className="w-3 h-3" /></button></li>
@@ -401,18 +424,27 @@ const App: React.FC = () => {
               </ul>
             </div>
 
-            <div className="space-y-8">
-              <h5 className="text-[12px] font-bold text-white uppercase tracking-[0.3em] opacity-90">Compliance</h5>
+            <div className="col-span-6 md:col-span-2 space-y-8">
+              <h5 className="text-[12px] font-bold text-white uppercase tracking-[0.3em] opacity-90">Network</h5>
+              <ul className="space-y-4 text-[12px] text-white/60 uppercase tracking-[0.1em] font-bold">
+                <li><a href="https://orionfeed.com/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors flex items-center gap-2">Feed <Rss className="w-3 h-3" /></a></li>
+                <li><a href="https://x.com/orionfeed" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors flex items-center gap-2">X <Twitter className="w-3 h-3" /></a></li>
+                <li><a href="https://www.linkedin.com/showcase/108619822/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors flex items-center gap-2">LinkedIn <Linkedin className="w-3 h-3" /></a></li>
+              </ul>
+            </div>
+
+            <div className="col-span-6 md:col-span-2 space-y-8">
+              <h5 className="text-[12px] font-bold text-white uppercase tracking-[0.3em] opacity-90">Policy</h5>
               <ul className="space-y-4 text-[12px] text-white/60 uppercase tracking-[0.1em] font-bold">
                 <li><button onClick={() => setActiveModal('privacy')} className="hover:text-blue-500 transition-colors">Privacy</button></li>
-                <li><button onClick={() => setActiveModal('compliance')} className="hover:text-blue-500 transition-colors">Audit Ready</button></li>
+                <li><button onClick={() => setActiveModal('compliance')} className="hover:text-blue-500 transition-colors">Audit</button></li>
               </ul>
             </div>
           </div>
           
           <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-10 text-[12px] font-bold uppercase tracking-[0.2em]">
             <div className="flex items-center gap-10 text-white/80">
-               <span>© 2025 Orion Intelligence Group</span>
+               <span>© 2025 Orion Intelligence</span>
                <span className="hidden md:inline font-mono text-blue-400">14.2B RECORDS</span>
             </div>
             <div className="flex gap-10 items-center">
