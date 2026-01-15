@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 :root {
+    --bg: #ffffff;
+    --fg: #0f172a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --accent: #3b82f6;
+}
+
+.dark {
     --bg: #010101;
     --fg: #fafafa;
     --muted: #666666;
@@ -12,13 +20,22 @@
 
 @layer base {
   body {
-    @apply antialiased bg-[#010101] text-[#fafafa];
+    @apply antialiased bg-white dark:bg-[#010101] text-slate-900 dark:text-[#fafafa] transition-colors duration-300;
     font-family: 'Plus Jakarta Sans', sans-serif;
     letter-spacing: -0.015em;
   }
 }
 
 .mesh-gradient {
+    @apply transition-all duration-700;
+    background-color: #ffffff;
+    background-image: 
+        radial-gradient(at 0% 0%, hsla(217,100%,95%,1) 0, transparent 40%), 
+        radial-gradient(at 100% 0%, hsla(210,100%,98%,1) 0, transparent 40%),
+        radial-gradient(at 50% 100%, hsla(220,100%,97%,1) 0, transparent 50%);
+}
+
+.dark .mesh-gradient {
     background-color: #010101;
     background-image: 
         radial-gradient(at 0% 0%, hsla(217,100%,10%,1) 0, transparent 40%), 
@@ -34,18 +51,16 @@
     height: 100%;
     pointer-events: none;
     z-index: 100;
-    opacity: 0.02;
+    opacity: 0.03;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-.glass-card {
-    background: rgba(10, 10, 10, 0.4);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+.dark .grain {
+    opacity: 0.02;
 }
 
-.text-balance {
-    text-wrap: balance;
+.glass-card {
+    @apply bg-white/70 dark:bg-[#0a0a0a]/40 backdrop-blur-2xl border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-none;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -62,12 +77,12 @@
     letter-spacing: -0.04em;
 }
 
-.section-heading {
-    line-height: 1.4;
-    letter-spacing: -0.03em;
+.discovery-gradient {
+    @apply transition-all duration-700;
+    background: radial-gradient(circle at 50% 100%, #f1f5f9 0%, #ffffff 80%);
 }
 
-.discovery-gradient {
+.dark .discovery-gradient {
     background: radial-gradient(circle at 50% 100%, #0a1122 0%, #010101 80%);
 }
 
@@ -76,7 +91,7 @@
 }
 
 .social-link:hover {
-    color: #fff;
+    @apply text-blue-600 dark:text-white;
     transform: translateY(-2px);
 }
 
